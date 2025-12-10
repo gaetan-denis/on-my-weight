@@ -139,7 +139,7 @@ class UserRepository
         ]);
 
         if ($stmt->rowCount() === 0) {
-            throw new RuntimeException("No user was updated,, check fi the ID exist.");
+            throw new RuntimeException("No user was updated,, check if the ID exist.");
         }
     }
 
