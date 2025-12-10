@@ -44,7 +44,7 @@ class Weight extends BaseEntity
      * @throws InvalidArgumentException If the weight is empty.
      * @throws InvalidArgumentException If the weight is negative.
      */
-    public function setWeight($weight): void
+    public function setWeight(float $weight): void
     {
         if (!is_numeric($weight)) {
             throw new InvalidArgumentException("Weight must be a number.");
