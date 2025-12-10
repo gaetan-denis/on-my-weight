@@ -13,10 +13,12 @@ class BaseEntity
 
     public function __construct(
         int $id,
+        ?DateTimeImmutable $createdAt = null,
+        ?DateTime $updatedAt = null
     ) {
         $this->id = $id;
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTime();
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
+        $this->updatedAt = $updatedAt ?? new DateTime();
     }
 
     /**
