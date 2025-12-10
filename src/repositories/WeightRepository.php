@@ -101,7 +101,9 @@ class WeightRepository
         $sql = "SELECT * FROM `weights`";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $weights = [];
 
         foreach ($data as $weight) {
             $weights[] = new Weight(
@@ -111,7 +113,7 @@ class WeightRepository
                 (float) $data['weight']
             );
         }
-        return $weight;
+        return $weights;
     }
 
     // Delete
