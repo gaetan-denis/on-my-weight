@@ -108,7 +108,7 @@ class WeightRepository
         foreach ($data as $weight) {
             $weights[] = new Weight(
                 $data['id'],
-                new DateTimeImmutable($data['created_at']),
+                new DateTimeImmutable($row['created_at']),
                 new DateTime($data['updated_at']),
                 (float) $data['weight']
             );
@@ -136,5 +136,32 @@ class WeightRepository
         if ($stmt->rowCount() === 0) {
             throw new RuntimeException("No weight was deleted, check if the ID exist.");
         }
+    }
+
+    /**
+     * Get all weights fot a given user.
+     * @param int $id The id of the user.
+     * @return Weights[]
+     * @throws RunTimeException If no weight are found.
+     */
+
+    public function getAllWeightsByUser(int $userId): array
+    {
+        $sql = "SELECT * FROM `Weights` WHERE user_id : userId ORDER BY created_at ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(["userId" => $userId]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (!data) {
+            return [];
+        }
+        foreach ($data as $row) {
+            $weights[] = new Weight(
+                $row['id'],
+                new DataTimeImmutable($row["created_at"]),
+                new DateTime($row["updated_at"]),
+                (float) $row["weight"]
+            );
+        }
+        return $weights;
     }
 }
