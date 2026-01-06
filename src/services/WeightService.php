@@ -18,4 +18,13 @@ class WeightService
         }
         $this->repo->createWeight($userId, $weight);
     }
+
+    /**
+    * @param int $userId
+    * @return \OnTheWeight\entities\Weight[]
+    */
+    public function getWeightsById(int $userId): array
+    {
+        return $this->repo->getAllWeightsByUser($userId);
+    }
 }

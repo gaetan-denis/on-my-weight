@@ -107,10 +107,10 @@ class WeightRepository
 
         foreach ($data as $weight) {
             $weights[] = new Weight(
-                $data['id'],
-                new DateTimeImmutable($row['created_at']),
-                new DateTime($data['updated_at']),
-                (float) $data['weight']
+                $weight['id'],
+                new DateTimeImmutable($weight['created_at']),
+                new DateTime($weight['updated_at']),
+                (float) $weight['weight']
             );
         }
         return $weights;
@@ -147,17 +147,18 @@ class WeightRepository
 
     public function getAllWeightsByUser(int $userId): array
     {
-        $sql = "SELECT * FROM `Weights` WHERE user_id : userId ORDER BY created_at ASC";
+        $sql = "SELECT * FROM `weights` WHERE user_id = userId ORDER BY created_at ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(["userId" => $userId]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (!data) {
+        if (!$data) {
             return [];
         }
+        $weights = [];
         foreach ($data as $row) {
             $weights[] = new Weight(
                 $row['id'],
-                new DataTimeImmutable($row["created_at"]),
+                new DateTimeImmutable($row["created_at"]),
                 new DateTime($row["updated_at"]),
                 (float) $row["weight"]
             );
