@@ -147,7 +147,7 @@ class WeightRepository
 
     public function getAllWeightsByUser(int $userId): array
     {
-        $sql = "SELECT * FROM `weights` WHERE user_id = userId ORDER BY created_at ASC";
+        $sql = "SELECT * FROM `weights` WHERE user_id = :userId ORDER BY created_at ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(["userId" => $userId]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
