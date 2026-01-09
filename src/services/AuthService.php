@@ -41,6 +41,6 @@ class AuthService
             $password
         );
         $user->setPassword($password);
-        $this->repo->addUser($user->getUsername(), $user->getEmail(), $user->getPasswordHash())
+        $this->repo->addUser($user->getUsername(), $user->getEmail(), $user->getPasswordHash());
     }
 }
