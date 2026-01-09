@@ -1,5 +1,10 @@
 # On My Weight
 
+![PHP](https://img.shields.io/badge/PHP-8.0+-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Build](https://img.shields.io/github/actions/workflow/status/username/on-my-weight/php.yml?branch=main)
+
+
 A small PHP exercise to understand the backend flow without any frameworks.  
 This project lets you track user weights and manage authentication using plain PHP.
 
