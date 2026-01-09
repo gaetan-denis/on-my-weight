@@ -17,10 +17,14 @@ class AuthController
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
+            if ($email === '' || $password === '') {
+                throw new RuntimeException("Email and password are required.");
+            }
+
             $this->service->login($email, $password);
             echo "Login successful";
         } catch (RuntimeException $e) {
-            echo "Error : " . $e->getMessage() . "; Code: " . $e->getCode();
+            echo "Error: " . $e->getMessage();
         }
     }
 
@@ -32,6 +36,9 @@ class AuthController
 
     public function register(): void
     {
+        if ($_POST['username'] === '' || $_POST['email'] === ' ' || $_POST['password']) {
+            throw new RuntimeException("Username, email and password are required.");
+        }
         try {
             $username = $_POST['username'] ?? '';
             $email = $_POST['email'] ?? '';
