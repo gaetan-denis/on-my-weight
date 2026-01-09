@@ -12,8 +12,14 @@ class WeightController
     }
     public function addWeight(): void
     {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            throw new RuntimeException("Unauthorized");
+            return;
+        }
         try {
-            $userId = (int) $_POST["user_id"];
+            $userId = $_SESSION['user_id'];
             $weight = (float) $_POST["weight"];
             $this->service->addWeight($userId, $weight);
 
@@ -25,8 +31,14 @@ class WeightController
 
     public function getWeightsByUser(): void
     {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            throw new RuntimeException("Unauthorized");
+            return;
+        }
         try {
-            $userId = (int) $_POST["user_id"];
+            $userId = $_SESSION['user_id'];
             $weights = $this->service->getWeightsById($userId);
             foreach ($weights as $weight) {
                 echo $weight->getWeight() . "kg;" . $weight->getCreatedAt()->format('Y-m-d H:i:s') . "<br>";
